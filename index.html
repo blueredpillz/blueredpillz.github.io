@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PILLZ — Recorded electronic music</title>
+<meta name="description" content="Independent platform for recorded electronic music. Recorded DJ sets, numbered and filed by genre. Every set is a door.">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20284%22%3E%3Cpath%20d%3D%22M0%20132%20L0%2050%20A50%2050%200%200%201%20100%2050%20L100%20132%20Z%22%20fill%3D%22%232741FF%22%2F%3E%3Cpath%20d%3D%22M0%20152%20L100%20152%20L100%20234%20A50%2050%200%200%201%200%20234%20Z%22%20fill%3D%22%23FF2D1C%22%2F%3E%3C%2Fsvg%3E">
+<link rel="apple-touch-icon" href="https://blueredpillz.github.io/og.png">
+<link rel="canonical" href="https://blueredpillz.github.io/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PILLZ">
+<meta property="og:title" content="PILLZ — Recorded electronic music">
+<meta property="og:description" content="Independent platform for recorded electronic music. Recorded DJ sets, numbered and filed by genre. Every set is a door.">
+<meta property="og:url" content="https://blueredpillz.github.io/">
+<meta property="og:image" content="https://blueredpillz.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PILLZ — Recorded electronic music">
+<meta name="twitter:description" content="Independent platform for recorded electronic music. Recorded DJ sets, numbered and filed by genre. Every set is a door.">
+<meta name="twitter:image" content="https://blueredpillz.github.io/og.png">
+</head>
+<body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+/* Layout: a pharmaceutical product insert. A full-bleed dose panel opens it,
+   then numbered sections set in the insert's own voice — composition, routes
+   of administration (the channels), the latest batch, the formulary. Extreme
+   scale contrast between display and data type is what makes a technical
+   document look severe. Single-theme: VOID is the brand's only ground. */
+:root {
+  --void: #0A0A0B;
+  --carbon: #121216;
+  --panel: #17171C;
+  --graphite: #2A2A2F;
+  --hair: #22222A;
+  --ash: #8C8C93;
+  --dim: #5A5A64;
+  --bone: #EDEAE3;
+  --ion: #2741FF;
+  --ion-lt: #5C72FF;
+  --signal: #FF2D1C;
+  --solar: #FFB400;
+  --glass: #CDD6DF;
+  --orbit: #8B5CFF;
+  --jade: #00D98C;
+  --sand: #D8C3A0;
+
+  --display: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --data: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--void);
+  color: var(--bone);
+  font-family: var(--display);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+.substrate { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: 0.30; }
+
+/* ---------- THE STREAM
+   The same field as the banners: the catalogue's own language falling — lot
+   digits, genre letters, a dose every few cells — with only the leading
+   character of a stream lit. Held far enough back that body copy reads over
+   it without a veil, and stilled entirely for anyone who asks for less
+   motion. */
+.rain {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none; opacity: 0.42;
+  font-family: var(--data); font-weight: 500;
+}
+.rain g.col { will-change: transform; }
+@media (prefers-reduced-motion: reduce) {
+  .rain g.col { animation: none !important; }
+}
+@keyframes fall { to { transform: translateY(var(--span)); } }
+
+/* The page's version of the banner "well": a pool of ground down the reading
+   column, soft at both edges so no shape shows. The stream keeps falling at
+   full strength in the margins and only gives way where words are. */
+.veil {
+  position: fixed; top: 0; bottom: 0; left: 0; right: 0;
+  margin-inline: auto; width: 100%; max-width: 604px;
+  z-index: 0; pointer-events: none;
+  background: linear-gradient(90deg,
+    rgba(10, 10, 11, 0) 0%,
+    rgba(10, 10, 11, 0.62) 7%,
+    rgba(10, 10, 11, 0.62) 93%,
+    rgba(10, 10, 11, 0) 100%);
+}
+
+.sheet {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  margin: 0 auto;
+  padding-left: max(18px, env(safe-area-inset-left, 0px));
+  padding-right: max(18px, env(safe-area-inset-right, 0px));
+  padding-block: 0 44px;
+}
+
+/* ---------- the data voice: small, wide, uppercase, tabular */
+.d {
+  font-family: var(--data); font-weight: 500;
+  font-size: 0.645rem; letter-spacing: 0.19em; text-transform: uppercase;
+  color: var(--ash); margin: 0; font-variant-numeric: tabular-nums;
+}
+.d--dim { color: var(--dim); }
+.d--bone { color: var(--bone); }
+
+/* ---------- top rail */
+.rail {
+  display: flex; flex-wrap: wrap; gap: 6px 16px;
+  padding-block: 14px 13px; border-bottom: 1px solid var(--hair);
+}
+.rail span:last-child { margin-left: auto; }
+
+/* ---------- opening panel */
+.panel { padding-block: 30px 34px; border-bottom: 1px solid var(--hair); }
+
+.dose-wrap {
+  display: flex; align-items: center; gap: clamp(16px, 5vw, 38px);
+}
+.dose {
+  flex: none;
+  width: clamp(52px, 14vw, 104px);
+  height: auto;
+  display: block;
+}
+.dose rect, .dose path { transform-box: fill-box; }
+.dose .half-t { animation: dropT 820ms cubic-bezier(.16,.84,.34,1) both; }
+.dose .half-b { animation: dropB 820ms cubic-bezier(.16,.84,.34,1) both; }
+@keyframes dropT { from { transform: translateY(-16%); } to { transform: none; } }
+@keyframes dropB { from { transform: translateY(16%); } to { transform: none; } }
+
+.titleblock { min-width: 0; flex: 1 1 auto; }
+.wordmark {
+  font-weight: 900; letter-spacing: -0.05em; line-height: 0.84;
+  font-size: clamp(2.6rem, 13.5vw, 5.6rem);
+  margin: 0; display: block;
+}
+.wordmark sup {
+  font-size: 0.2em; font-weight: 700; letter-spacing: 0.08em;
+  vertical-align: super; color: var(--ash); margin-left: 0.18em; top: 0;
+}
+.titleblock .sub { margin-top: 12px; }
+
+.strength {
+  display: flex; flex-wrap: wrap; gap: 7px; margin-top: 22px;
+}
+.strength b {
+  font-family: var(--data); font-weight: 700; font-size: 0.6rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 7px 13px; border-radius: 999px;
+  border: 1px solid var(--graphite); color: var(--ash);
+}
+.strength b.on { background: var(--bone); border-color: var(--bone); color: var(--void); }
+
+/* ---------- sections */
+section { padding-block: 32px; border-bottom: 1px solid var(--hair); }
+section:last-of-type { border-bottom: 0; }
+
+.sechead { display: flex; align-items: baseline; gap: 12px; margin-bottom: 18px; }
+.sechead .no {
+  font-family: var(--data); font-weight: 700; font-size: 0.72rem;
+  color: var(--signal); font-variant-numeric: tabular-nums; flex: none;
+}
+.sechead h2 {
+  font-weight: 900; letter-spacing: -0.015em; font-size: 1.02rem;
+  text-transform: uppercase; margin: 0;
+}
+.sechead .tail { margin-left: auto; }
+
+.body { color: var(--ash); font-size: 0.935rem; line-height: 1.55; margin: 0; max-width: 46ch; }
+.body + .body { margin-top: 11px; }
+.body b { color: var(--bone); font-weight: 600; }
+
+/* ---------- routes of administration = the links */
+.routes { display: flex; flex-direction: column; gap: 9px; }
+
+.route {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 15px;
+  min-height: 66px;
+  padding: 12px 20px 12px 17px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid var(--graphite);
+  color: var(--bone);
+  background: var(--carbon);
+  transition: border-color 140ms ease, background-color 140ms ease, transform 140ms ease;
+}
+.route:hover, .route:focus-visible { border-color: var(--bone); transform: translateY(-1px); }
+.route:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+.route:active { transform: translateY(0); }
+
+.route--primary { background: var(--bone); border-color: var(--bone); color: var(--void); }
+.route--primary:hover, .route--primary:focus-visible { background: #FBF9F3; border-color: #FBF9F3; }
+
+.route__no {
+  font-family: var(--data); font-weight: 700; font-size: 0.66rem;
+  letter-spacing: 0.1em; color: var(--dim); font-variant-numeric: tabular-nums;
+}
+.route--primary .route__no { color: #908B80; }
+
+.route__text { min-width: 0; overflow: hidden; }
+.route__name {
+  display: block; font-weight: 900; letter-spacing: -0.022em;
+  font-size: 1.1rem; line-height: 1.12;
+}
+.route__sub {
+  display: block; margin-top: 3px;
+  font-family: var(--data); font-weight: 500; font-size: 0.59rem;
+  letter-spacing: 0.17em; text-transform: uppercase; color: var(--ash);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.route--primary .route__sub { color: #6E6A61; }
+
+.route__go { flex: none; display: grid; place-items: center; }
+.route__go svg { display: block; opacity: 0.6; }
+.route:hover .route__go svg, .route:focus-visible .route__go svg { opacity: 1; }
+
+/* Our dose, stamped on every route — and on SoundCloud it wears that
+   platform's colourway, the same rule the artwork follows. */
+.route__mark { display: block; flex: none; }
+@media (max-width: 360px) { .route__mark { display: none; } }
+
+/* ---------- batch */
+.batch {
+  display: block; text-decoration: none; color: inherit;
+  border: 1px solid var(--graphite); border-radius: 20px; overflow: hidden;
+  background: var(--carbon);
+}
+.batch:hover, .batch:focus-visible { border-color: var(--c); }
+.batch:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; }
+.batch__field { position: relative; aspect-ratio: 16 / 6.5; background: var(--panel); }
+.batch__field svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.batch--empty { border-style: dashed; }
+.batch--empty .batch__field { opacity: 0.4; }
+.batch--empty .batch__body { border-top-style: dashed; }
+.batch__body { padding: 15px 18px 17px; border-top: 3px solid var(--c); }
+.batch__name { font-weight: 900; letter-spacing: -0.028em; font-size: 1.5rem; line-height: 1.04; margin: 7px 0 3px; }
+.batch__title { color: var(--ash); font-size: 0.9rem; margin: 0 0 11px; }
+.batch .lot { color: var(--c); }
+
+/* ---------- formulary */
+.form-table { width: 100%; border-collapse: collapse; }
+.form-table tr { border-bottom: 1px solid var(--hair); }
+.form-table tr:last-child { border-bottom: 0; }
+.form-table td { padding: 9px 10px 9px 0; vertical-align: middle; }
+.form-table td.sw { width: 34px; padding-right: 0; }
+.form-table td.sw i { display: block; width: 22px; height: 11px; border-radius: 999px; }
+.form-table td.no {
+  width: 34px; font-family: var(--data); font-weight: 700; font-size: 0.66rem;
+  color: var(--bone); font-variant-numeric: tabular-nums;
+}
+.form-table td.nm { font-size: 0.88rem; color: var(--bone); }
+.form-table td.hx {
+  text-align: right; font-family: var(--data); font-weight: 400; font-size: 0.66rem;
+  color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+
+/* ---------- contact */
+.copy {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  width: 100%; min-height: 54px; padding: 12px 18px; margin-top: 13px;
+  border-radius: 999px; border: 1px dashed var(--graphite);
+  background: transparent; color: var(--bone); cursor: pointer; text-align: left;
+  font-family: var(--data); font-weight: 500; font-size: 0.74rem; letter-spacing: 0.06em;
+}
+.copy:hover, .copy:focus-visible { border-color: var(--bone); border-style: solid; }
+.copy:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+.copy .addr { min-width: 0; overflow-wrap: anywhere; }
+.copy .act {
+  flex: none; font-weight: 700; font-size: 0.58rem; letter-spacing: 0.17em;
+  text-transform: uppercase; color: var(--ash);
+}
+.copy[data-done="1"] { border-color: var(--jade); border-style: solid; }
+.copy[data-done="1"] .act { color: var(--jade); }
+
+/* ---------- footer */
+.foot { padding-block: 26px 0; display: flex; flex-direction: column; gap: 14px; }
+.foot .split { display: block; width: 100%; height: 4px; }
+.foot .grid2 { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
+
+/* ---------- corner registration marks */
+.regs { position: fixed; inset: 0; z-index: 2; pointer-events: none; }
+.regs i { position: absolute; width: 15px; height: 15px; }
+.regs i::before, .regs i::after { content: ""; position: absolute; background: var(--graphite); }
+.regs i::before { width: 15px; height: 1px; }
+.regs i::after { width: 1px; height: 15px; }
+.regs .tl { top: 13px; left: 13px; } .regs .tl::before, .regs .tl::after { top: 0; left: 0; }
+.regs .tr { top: 13px; right: 13px; } .regs .tr::before { top: 0; right: 0; } .regs .tr::after { top: 0; right: 0; }
+.regs .bl { bottom: 13px; left: 13px; } .regs .bl::before { bottom: 0; left: 0; } .regs .bl::after { bottom: 0; left: 0; }
+.regs .br { bottom: 13px; right: 13px; } .regs .br::before { bottom: 0; right: 0; } .regs .br::after { bottom: 0; right: 0; }
+@media (max-width: 680px) { .regs { display: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, .dose .half-t, .dose .half-b { animation: none !important; transition: none !important; }
+}
+</style>
+
+<svg class="substrate" aria-hidden="true">
+  <defs>
+    <pattern id="blister" width="44" height="44" patternUnits="userSpaceOnUse">
+      <rect x="18.75" y="7" width="6.5" height="12" rx="3.25" fill="#15151A"/>
+      <rect x="18.75" y="23" width="6.5" height="12" rx="3.25" fill="#15151A"/>
+    </pattern>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#blister)"/>
+</svg>
+
+<svg class="rain" id="rain" aria-hidden="true"></svg>
+<div class="veil" aria-hidden="true"></div>
+
+<div class="regs" aria-hidden="true"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i></div>
+
+<div class="sheet">
+
+  <div class="rail d d--dim">
+    <span>Product insert &nbsp;·&nbsp; Rev 2026-A</span>
+    <span id="railHandle">@blueredpillz</span>
+  </div>
+
+  <div class="panel">
+    <div class="dose-wrap">
+      <svg class="dose" viewBox="0 0 100 284" role="img" aria-label="The PILLZ dose">
+        <path class="half-t" d="M0 132 L0 50 A50 50 0 0 1 100 50 L100 132 Z" fill="#2741FF"/>
+        <path class="half-b" d="M0 152 L100 152 L100 234 A50 50 0 0 1 0 234 Z" fill="#FF2D1C"/>
+      </svg>
+      <div class="titleblock">
+        <span class="wordmark">PILLZ<sup>®</sup></span>
+        <p class="d d--bone sub">Electronic music platform</p>
+        <p class="d d--dim" style="margin-top:5px">Each dose contains one complete set</p>
+      </div>
+    </div>
+    <div class="strength">
+      <b class="on">Recorded sets</b><b>Numbered by lot</b><b>Filed by genre</b>
+    </div>
+  </div>
+
+  <section>
+    <div class="sechead"><span class="no">1</span><h2>Composition</h2></div>
+    <p class="body">Recorded electronic music, released as a numbered catalogue. Every set is filed with its <b>lot number</b>, its genre and the room it came from, so the archive stays as useful in five years as it is tonight.</p>
+    <p class="body">No cuts. No fades. No highlight reels.</p>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="no">2</span><h2>Routes of administration</h2>
+      <span class="d d--dim tail" id="routeCount"></span>
+    </div>
+    <nav class="routes" id="routes" aria-label="Where to find PILLZ"></nav>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="no">3</span><h2>Latest batch</h2>
+      <span class="d d--dim tail" id="batchTail"></span>
+    </div>
+    <div id="batchSlot"></div>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="no">4</span><h2>Formulary</h2>
+      <span class="d d--dim tail">One per release</span>
+    </div>
+    <table class="form-table"><tbody id="formulary"></tbody></table>
+  </section>
+
+  <section>
+    <div class="sechead"><span class="no">5</span><h2>Contact</h2></div>
+    <p class="body">For anything to do with the catalogue.</p>
+    <button class="copy" id="copyMail" type="button">
+      <span class="addr" id="mailAddr"></span>
+      <span class="act" id="copyAct">Copy</span>
+    </button>
+  </section>
+
+  <div class="foot">
+    <svg class="split" viewBox="0 0 1000 4" preserveAspectRatio="none" aria-hidden="true"><rect width="494" height="4" rx="2" fill="#2741FF"/><rect x="506" width="494" height="4" rx="2" fill="#FF2D1C"/></svg>
+    <div class="grid2">
+      <p class="d d--dim">Store in a dark room &nbsp;·&nbsp; Play loud</p>
+      <p class="d d--dim" id="footBatch"></p>
+    </div>
+    <p class="d d--bone">Every set is a door</p>
+  </div>
+
+</div>
+
+<script>
+/* ===========================================================================
+   EDIT THIS BLOCK ONLY.
+   ======================================================================== */
+
+const HANDLE = '@blueredpillz';
+const EMAIL  = 'blueredpillz@gmail.com';        // confirmed
+
+/* No set is published yet, so this is null and the section shows an honest
+   waiting state instead of an invented release. The moment lot 001 is up,
+   replace null with the object below and the real card renders itself. */
+const BATCH = null;
+
+/* const BATCH = {
+     lot:    '001',
+     artist: 'Artist name',
+     title:  'Where it was recorded',
+     label:  'Tech house',
+     accent: '--solar',
+     url:    'https://www.youtube.com/@blueredpillz'
+   }; */
+
+/* `skin` recolours that route's dose. SoundCloud wears its own colourway
+   here for the same reason its artwork does. */
+const ROUTES = [
+  { name: 'YouTube',    sub: 'Every lot, in full',    url: 'https://www.youtube.com/@blueredpillz', primary: true },
+  { name: 'SoundCloud', sub: 'The archive',           url: 'https://soundcloud.com/blueredpillz',   primary: true,
+    skin: ['#FF5500', '#CC4400'] },
+  { name: 'Instagram',  sub: 'Lots and tracklists',   url: 'https://www.instagram.com/blueredpillz' },
+  { name: 'Patreon',    sub: 'Support the catalogue', url: 'https://www.patreon.com/c/sundaygroovesradio' }
+  /* Add TikTok the same way when you have the handle:
+  , { name: 'TikTok', sub: 'Clips', url: 'https://www.tiktok.com/@blueredpillz' } */
+];
+
+const FORMULARY = [
+  ['01', 'House / tech house',      '--solar',  '#FFB400'],
+  ['02', 'Techno',                  '--glass',  '#CDD6DF'],
+  ['03', 'Deep / minimal',         '--ion-lt', '#5C72FF'],
+  ['04', 'Special / recorded live', '--signal', '#FF2D1C'],
+  ['05', 'Melodic / progressive',   '--orbit',  '#8B5CFF'],
+  ['06', 'Garage / breaks / disco', '--jade',   '#00D98C'],
+  ['07', 'Ambient / downtempo',     '--sand',   '#D8C3A0']
+];
+
+/* ======================= nothing to edit below ========================== */
+
+document.getElementById('railHandle').textContent = HANDLE;
+document.getElementById('mailAddr').textContent = EMAIL;
+document.getElementById('footBatch').textContent =
+  (BATCH ? 'Batch ' + BATCH.lot : 'Batch 001 pending') + ' · Thessaloniki';
+document.getElementById('routeCount').textContent = String(ROUTES.length).padStart(2, '0') + ' channels';
+
+/* ---------------------------------------------------------------- THE STREAM
+   Columns of the catalogue's own language, falling. Each column holds one
+   cycle of glyphs rendered twice and is translated by exactly one cycle, so
+   the loop has no seam. Opacity falls away behind each stream's head; only
+   the head is lit, in ION or SIGNAL. Rebuilt on resize, never on scroll. */
+const GLYPHS = '0123456789ABCDEFGHJKLMNPRSTUVWXYZ';
+const DOSE_G = (x, y, s, fill, op) =>
+  `<rect x="${(x - s * 0.5).toFixed(1)}" y="${(y - s * 1.45).toFixed(1)}" width="${s}" height="${(s * 1.25).toFixed(1)}" rx="${(s / 2).toFixed(1)}" fill="${fill}" opacity="${op}"/>` +
+  `<rect x="${(x - s * 0.5).toFixed(1)}" y="${(y - s * 0.05).toFixed(1)}" width="${s}" height="${(s * 1.25).toFixed(1)}" rx="${(s / 2).toFixed(1)}" fill="${fill}" opacity="${op}"/>`;
+
+function buildRain() {
+  const el = document.getElementById('rain');
+  if (!el) return;
+  const W = window.innerWidth, H = window.innerHeight;
+  const pitch = Math.max(26, Math.min(42, W / 22));
+  const cols = Math.ceil(W / pitch) + 1;
+  const rows = Math.ceil(H / pitch) + 2;
+  const span = rows * pitch;
+  const size = (pitch * 0.46).toFixed(1);
+  let seed = 0x9e3779b9;
+  const rnd = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296);
+  let out = '';
+
+  for (let c = 0; c < cols; c++) {
+    if (rnd() > 0.80) continue;
+    const op = new Array(rows).fill(0);
+    const fx = new Array(rows).fill(null);
+    const dz = new Array(rows).fill(false);
+    const streams = 1 + Math.floor(rnd() * 2);
+    for (let s = 0; s < streams; s++) {
+      const head = Math.floor(rnd() * rows);
+      const len = 4 + Math.floor(rnd() * 11);
+      const lit = rnd() < 0.34;
+      const warm = rnd() < 0.3;
+      for (let k = 0; k < len; k++) {
+        const r = ((head - k) % rows + rows) % rows;
+        const o = Math.pow(1 - k / len, 1.25);
+        if (o <= op[r]) continue;
+        op[r] = o;
+        fx[r] = (k === 0 && lit) ? (warm ? '#FF2D1C' : '#2741FF') : null;
+        dz[r] = rnd() < 0.17;
+      }
+    }
+    let body = '';
+    for (let r = 0; r < rows; r++) {
+      if (op[r] <= 0.02) continue;
+      const x = c * pitch + pitch / 2;
+      const y = r * pitch + pitch * 0.72;
+      const fill = fx[r] || '#EDEAE3';
+      const o = (fx[r] ? 1 : op[r] * 0.85).toFixed(3);
+      body += dz[r]
+        ? DOSE_G(x, y, pitch * 0.17, fill, o)
+        : `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="${size}" fill="${fill}" opacity="${o}" text-anchor="middle">${GLYPHS[Math.floor(rnd() * GLYPHS.length)]}</text>`;
+    }
+    if (!body) continue;
+    const dur = (16 + rnd() * 26).toFixed(1);
+    out += `<g class="col" style="--span:${span}px; animation: fall ${dur}s linear infinite;">`
+         + body + `<g transform="translate(0,${-span})">${body}</g></g>`;
+  }
+  el.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  el.innerHTML = out;
+}
+
+buildRain();
+let rainTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(rainTimer);
+  rainTimer = setTimeout(buildRain, 220);
+});
+
+const hex = tok => getComputedStyle(document.documentElement).getPropertyValue(tok).trim();
+
+/* A deterministic blister field, so a batch always looks the same. */
+function field(seed, accent) {
+  let h = 0;
+  for (const ch of seed) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  const next = () => (h = (h * 1664525 + 1013904223) >>> 0) / 4294967296;
+  const cols = 13, rows = 4;
+  let out = '';
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const lit = next() < 0.095;
+      const x = (c + 0.5) * (100 / cols), y = (r + 0.5) * (100 / rows);
+      const fill = lit ? accent : '#272730';
+      out += `<rect x="${(x - 1.2).toFixed(2)}" y="${(y - 9.4).toFixed(2)}" width="2.4" height="8.6" rx="1.2" fill="${fill}"/>`;
+      out += `<rect x="${(x - 1.2).toFixed(2)}" y="${(y + 0.8).toFixed(2)}" width="2.4" height="8.6" rx="1.2" fill="${fill}"/>`;
+    }
+  }
+  return `<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${out}</svg>`;
+}
+
+const GO = `<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+  <path d="M3.4 12.6 L12.6 3.4 M5.9 3.4 H12.6 V10.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg>`;
+
+const MARK = ([t, b]) => `<svg class="route__mark" width="11" height="31" viewBox="0 0 100 284" aria-hidden="true">
+  <path d="M0 132 L0 50 A50 50 0 0 1 100 50 L100 132 Z" fill="${t}"/>
+  <path d="M0 152 L100 152 L100 234 A50 50 0 0 1 0 234 Z" fill="${b}"/></svg>`;
+
+document.getElementById('routes').innerHTML = ROUTES.map((r, i) => `
+  <a class="route${r.primary ? ' route--primary' : ''}" href="${r.url}" target="_blank" rel="noopener">
+    <span class="route__no">${String(i + 1).padStart(2, '0')}</span>
+    <span class="route__text">
+      <span class="route__name">${r.name}</span>
+      <span class="route__sub">${r.sub}</span>
+    </span>
+    ${MARK(r.skin || ['#2741FF', '#FF2D1C'])}
+    <span class="route__go">${GO}</span>
+  </a>`).join('');
+
+const slot = document.getElementById('batchSlot');
+const tail = document.getElementById('batchTail');
+
+if (BATCH) {
+  tail.textContent = 'Out now';
+  slot.innerHTML = `
+    <a class="batch" href="${BATCH.url}" target="_blank" rel="noopener"
+       style="--c: var(${BATCH.accent})">
+      <div class="batch__field">${field(BATCH.lot + BATCH.artist, hex(BATCH.accent))}</div>
+      <div class="batch__body">
+        <p class="d">Lot <span class="lot">${BATCH.lot}</span> &nbsp;·&nbsp; ${BATCH.label}</p>
+        <p class="batch__name">${BATCH.artist}</p>
+        <p class="batch__title">${BATCH.title}</p>
+        <p class="d d--dim">Listen &nbsp;→</p>
+      </div>
+    </a>`;
+} else {
+  /* Nothing is published yet. An empty slot is more honest than a placeholder
+     release, and it reads as a catalogue waiting to start rather than a page
+     that is broken. */
+  tail.textContent = 'In preparation';
+  slot.innerHTML = `
+    <div class="batch batch--empty" style="--c: var(--graphite)">
+      <div class="batch__field">${field('lot001', '#272730')}</div>
+      <div class="batch__body">
+        <p class="d">Lot <span class="lot">001</span> &nbsp;·&nbsp; Unassigned</p>
+        <p class="batch__name">Soon</p>
+        <p class="batch__title">The first set is being catalogued.</p>
+        <p class="d d--dim">Follow a channel above to catch it</p>
+      </div>
+    </div>`;
+}
+
+document.getElementById('formulary').innerHTML = FORMULARY.map(([no, name, tok, hx]) => `
+  <tr>
+    <td class="sw"><i style="background: var(${tok})"></i></td>
+    <td class="no">${no}</td>
+    <td class="nm">${name}</td>
+    <td class="hx">${hx}</td>
+  </tr>`).join('');
+
+/* Copy the address. The clipboard can be refused, so fall back to selecting. */
+const btn = document.getElementById('copyMail');
+const act = document.getElementById('copyAct');
+let timer;
+btn.addEventListener('click', async () => {
+  const done = msg => {
+    act.textContent = msg;
+    btn.dataset.done = '1';
+    clearTimeout(timer);
+    timer = setTimeout(() => { act.textContent = 'Copy'; btn.dataset.done = '0'; }, 2400);
+  };
+  try {
+    await navigator.clipboard.writeText(EMAIL);
+    done('Copied');
+  } catch {
+    const node = document.getElementById('mailAddr');
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+    done('Select it');
+  }
+});
+</script>
+
+</body>
+</html>
