@@ -236,6 +236,69 @@ section:last-of-type { border-bottom: 0; }
 .route__mark { display: block; flex: none; }
 @media (max-width: 360px) { .route__mark { display: none; } }
 
+/* ---------- selections = the two Spotify playlists, kept as a pair
+   They sit inside the routes, because they are another place to find PILLZ.
+   But they are a choice between two things rather than four separate doors,
+   so they get cards side by side instead of another pair of rows. */
+.selhead {
+  display: flex; align-items: center; gap: 9px;
+  margin: 20px 0 10px; padding-top: 17px;
+  border-top: 1px solid var(--hair);
+}
+.selhead .tail { margin-left: auto; }
+/* Spotify's green, used as a signal that the next two links leave for it.
+   Their logo is theirs; a colour and their name are not. */
+.selhead__dot {
+  flex: none; width: 9px; height: 9px; border-radius: 999px;
+  background: #1DB954; box-shadow: 0 0 0 3px rgba(29,185,84,0.16);
+}
+
+.sel { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.sel a {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 2px; padding: 17px 10px 14px;
+  border-radius: 20px; text-decoration: none; overflow: hidden;
+  border: 1px solid var(--graphite); background: var(--carbon);
+  color: var(--bone);
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.sel a::before {
+  content: ""; position: absolute; left: 50%; top: -42%;
+  width: 150%; aspect-ratio: 1; transform: translateX(-50%);
+  background: radial-gradient(circle, var(--c) 0%, transparent 62%);
+  opacity: 0.17; transition: opacity 160ms ease;
+  pointer-events: none;
+}
+.sel a:hover, .sel a:focus-visible { border-color: var(--c); transform: translateY(-2px); }
+.sel a:hover::before, .sel a:focus-visible::before { opacity: 0.30; }
+.sel a:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; }
+.sel a:active { transform: translateY(0); }
+
+.sel__pill { position: relative; display: block; margin-bottom: 11px; }
+.sel__name {
+  position: relative;
+  font-weight: 900; letter-spacing: -0.022em; font-size: 1.0rem; line-height: 1.1;
+}
+.sel__sub {
+  position: relative; margin-top: 4px;
+  font-family: var(--data); font-weight: 500; font-size: 0.525rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--ash);
+  text-align: center;
+}
+.sel__go {
+  position: relative; margin-top: 10px;
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--data); font-weight: 700; font-size: 0.525rem;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--ash);
+}
+.sel__go i {
+  width: 6px; height: 6px; border-radius: 999px; background: #1DB954;
+  flex: none;
+}
+@media (max-width: 330px) { .sel { grid-template-columns: 1fr; } }
+
 /* ---------- batch */
 .batch {
   display: block; text-decoration: none; color: inherit;
@@ -362,6 +425,13 @@ section:last-of-type { border-bottom: 0; }
       <span class="d d--dim tail" id="routeCount"></span>
     </div>
     <nav class="routes" id="routes" aria-label="Where to find PILLZ"></nav>
+
+    <div class="selhead">
+      <span class="selhead__dot" aria-hidden="true"></span>
+      <span class="d d--bone">On Spotify</span>
+      <span class="d d--dim tail">02 selections</span>
+    </div>
+    <nav class="sel" id="selections" aria-label="PILLZ playlists on Spotify"></nav>
   </section>
 
   <section>
@@ -432,6 +502,18 @@ const ROUTES = [
   { name: 'Patreon',    sub: 'Support the catalogue', url: 'https://www.patreon.com/c/sundaygroovesradio' }
   /* Add TikTok the same way when you have the handle:
   , { name: 'TikTok', sub: 'Clips', url: 'https://www.tiktok.com/@blueredpillz' } */
+];
+
+/* The two selections. `skin` is the pair of tones the dose wears — the same
+   device that gives SoundCloud its orange one, used here to say blue or red
+   without changing the shape of the mark. */
+const SELECTIONS = [
+  { name: 'BLUE PILL', sub: 'Techno',     colour: '--ion',
+    skin: ['#2741FF', '#1B2FBF'],
+    url: 'https://open.spotify.com/playlist/2a8QlFCVYart64P7XQF6sr' },
+  { name: 'RED PILL',  sub: 'Tech house', colour: '--signal',
+    skin: ['#FF2D1C', '#C01F12'],
+    url: 'https://open.spotify.com/playlist/7HQEzbnKPTVGGtfmwh4Ztu' }
 ];
 
 const FORMULARY = [
@@ -546,9 +628,12 @@ function field(seed, accent) {
 const GO = `<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
   <path d="M3.4 12.6 L12.6 3.4 M5.9 3.4 H12.6 V10.1" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square"/></svg>`;
 
-const MARK = ([t, b]) => `<svg class="route__mark" width="11" height="31" viewBox="0 0 100 284" aria-hidden="true">
-  <path d="M0 132 L0 50 A50 50 0 0 1 100 50 L100 132 Z" fill="${t}"/>
-  <path d="M0 152 L100 152 L100 234 A50 50 0 0 1 0 234 Z" fill="${b}"/></svg>`;
+/* One mark, every size. Two tones rather than one, so a route can wear its
+   platform's colourway the way SoundCloud does without changing shape. */
+const MARK = ([t, b], cls = 'route__mark', w = 11, h = 31) =>
+  `<svg class="${cls}" width="${w}" height="${h}" viewBox="0 0 100 284" aria-hidden="true">
+     <path d="M0 132 L0 50 A50 50 0 0 1 100 50 L100 132 Z" fill="${t}"/>
+     <path d="M0 152 L100 152 L100 234 A50 50 0 0 1 0 234 Z" fill="${b}"/></svg>`;
 
 document.getElementById('routes').innerHTML = ROUTES.map((r, i) => `
   <a class="route${r.primary ? ' route--primary' : ''}" href="${r.url}" target="_blank" rel="noopener">
@@ -559,6 +644,15 @@ document.getElementById('routes').innerHTML = ROUTES.map((r, i) => `
     </span>
     ${MARK(r.skin || ['#2741FF', '#FF2D1C'])}
     <span class="route__go">${GO}</span>
+  </a>`).join('');
+
+document.getElementById('selections').innerHTML = SELECTIONS.map(s => `
+  <a href="${s.url}" target="_blank" rel="noopener" style="--c: var(${s.colour})"
+     aria-label="${s.name}, ${s.sub} selection, on Spotify">
+    ${MARK(s.skin, 'sel__pill', 15, 42)}
+    <span class="sel__name">${s.name}</span>
+    <span class="sel__sub">${s.sub} selection</span>
+    <span class="sel__go"><i></i>Spotify</span>
   </a>`).join('');
 
 const slot = document.getElementById('batchSlot');
