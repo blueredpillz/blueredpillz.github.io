@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>PILLZ — Recorded electronic music</title>
-<meta name="description" content="Independent platform for recorded electronic music. Recorded DJ sets, numbered and filed by genre. Every set is a door.">
+<meta name="description" content="A curated catalogue of electronic music, selected for energy and mood rather than genre. Made by people. Nothing here is generated.">
 <meta name="theme-color" content="#0A0A0B">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20284%22%3E%3Cpath%20d%3D%22M0%20132%20L0%2050%20A50%2050%200%200%201%20100%2050%20L100%20132%20Z%22%20fill%3D%22%232741FF%22%2F%3E%3Cpath%20d%3D%22M0%20152%20L100%20152%20L100%20234%20A50%2050%200%200%201%200%20234%20Z%22%20fill%3D%22%23FF2D1C%22%2F%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="https://blueredpillz.github.io/og.png">
@@ -13,14 +13,14 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PILLZ">
 <meta property="og:title" content="PILLZ — Recorded electronic music">
-<meta property="og:description" content="Independent platform for recorded electronic music. Recorded DJ sets, numbered and filed by genre. Every set is a door.">
+<meta property="og:description" content="A curated catalogue of electronic music, selected for energy and mood rather than genre. Made by people. Nothing here is generated.">
 <meta property="og:url" content="https://blueredpillz.github.io/">
 <meta property="og:image" content="https://blueredpillz.github.io/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="PILLZ — Recorded electronic music">
-<meta name="twitter:description" content="Independent platform for recorded electronic music. Recorded DJ sets, numbered and filed by genre. Every set is a door.">
+<meta name="twitter:description" content="A curated catalogue of electronic music, selected for energy and mood rather than genre. Made by people. Nothing here is generated.">
 <meta name="twitter:image" content="https://blueredpillz.github.io/og.png">
 </head>
 <body>
@@ -316,6 +316,7 @@ section:last-of-type { border-bottom: 0; }
 .batch__name { font-weight: 900; letter-spacing: -0.028em; font-size: 1.5rem; line-height: 1.04; margin: 7px 0 3px; }
 .batch__title { color: var(--ash); font-size: 0.9rem; margin: 0 0 11px; }
 .batch .lot { color: var(--c); }
+.batch__count { font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
 
 /* ---------- formulary */
 .form-table { width: 100%; border-collapse: collapse; }
@@ -333,6 +334,37 @@ section:last-of-type { border-bottom: 0; }
   text-align: right; font-family: var(--data); font-weight: 400; font-size: 0.66rem;
   color: var(--dim); font-variant-numeric: tabular-nums; white-space: nowrap;
 }
+
+/* ---------- the statement
+   One line that has to land harder than body copy, so it gets the dose as a
+   rule down its left edge: blue above, the gap, red below. */
+.statement {
+  position: relative; margin: 16px 0 0; padding-left: 17px;
+  font-size: 1.04rem; line-height: 1.4; font-weight: 600; color: var(--bone);
+  max-width: 42ch;
+}
+.statement::before {
+  content: ""; position: absolute; left: 0; top: 3px; bottom: 3px; width: 3px;
+  border-radius: 999px;
+  background: linear-gradient(180deg,
+    var(--ion) 0%, var(--ion) 45%,
+    transparent 45%, transparent 55%,
+    var(--signal) 55%, var(--signal) 100%);
+}
+
+/* ---------- the open call */
+.call { list-style: none; margin: 18px 0 0; padding: 0;
+        display: flex; flex-direction: column; gap: 15px; }
+.call li { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; }
+.call svg { display: block; margin-top: 3px; }
+.call p { margin: 0; color: var(--ash); font-size: 0.935rem; line-height: 1.5; }
+.call b { color: var(--bone); font-weight: 600; }
+
+.closer {
+  margin: 22px 0 0; font-size: 1.0rem; line-height: 1.42;
+  font-weight: 900; letter-spacing: -0.018em; color: var(--bone);
+}
+.closer span { color: var(--dim); font-weight: 600; letter-spacing: 0; }
 
 /* ---------- contact */
 .copy {
@@ -409,14 +441,15 @@ section:last-of-type { border-bottom: 0; }
       </div>
     </div>
     <div class="strength">
-      <b class="on">Recorded sets</b><b>Numbered by lot</b><b>Filed by genre</b>
+      <b class="on">Recorded sets</b><b>Numbered by lot</b><b>Energy over genre</b>
     </div>
   </div>
 
   <section>
     <div class="sechead"><span class="no">1</span><h2>Composition</h2></div>
-    <p class="body">Recorded electronic music, released as a numbered catalogue. Every set is filed with its <b>lot number</b>, its genre and the room it came from, so the archive stays as useful in five years as it is tonight.</p>
-    <p class="body">No cuts. No fades. No highlight reels.</p>
+    <p class="body">Electronic music, selected and released as a numbered catalogue. What decides a lot is <b>energy and mood</b> — never a genre label. A set is free to move from one sound into another, and most of them do, as long as the grip holds.</p>
+    <p class="body">Every lot carries the room it came from. Not an address: the feel of a room. The hour, how full it was, what it asked of you.</p>
+    <p class="body"><b>Curated, not accumulated.</b> No cuts, no fades, no highlight reels.</p>
   </section>
 
   <section>
@@ -445,14 +478,28 @@ section:last-of-type { border-bottom: 0; }
   <section>
     <div class="sechead">
       <span class="no">4</span><h2>Formulary</h2>
-      <span class="d d--dim tail">One per release</span>
+      <span class="d d--dim tail">Dominant colour</span>
     </div>
     <table class="form-table"><tbody id="formulary"></tbody></table>
   </section>
 
   <section>
-    <div class="sechead"><span class="no">5</span><h2>Contact</h2></div>
-    <p class="body">For anything to do with the catalogue.</p>
+    <div class="sechead">
+      <span class="no">5</span><h2>Manufacture</h2>
+      <span class="d d--dim tail">By hand</span>
+    </div>
+    <p class="body">PILLZ runs on work made by people. Every cover is a real photograph, taken by someone who was standing there. Every set is someone's hands on the records.</p>
+    <p class="statement">Nothing here is generated, and nothing here ever will be.</p>
+  </section>
+
+  <section>
+    <div class="sechead">
+      <span class="no">6</span><h2>Submissions</h2>
+      <span class="d d--dim tail">Open</span>
+    </div>
+    <p class="body">And that part is open to you.</p>
+    <ul class="call" id="call"></ul>
+    <p class="closer">The platform comes second.<br><span>The people come first.</span></p>
     <button class="copy" id="copyMail" type="button">
       <span class="addr" id="mailAddr"></span>
       <span class="act" id="copyAct">Copy</span>
@@ -478,9 +525,19 @@ section:last-of-type { border-bottom: 0; }
 const HANDLE = '@blueredpillz';
 const EMAIL  = 'blueredpillz@gmail.com';        // confirmed
 
-/* No set is published yet, so this is null and the section shows an honest
-   waiting state instead of an invented release. The moment lot 001 is up,
-   replace null with the object below and the real card renders itself. */
+/* Lot 001 has a date but is not out yet, so the section counts down to it.
+   `at` is the premiere in full ISO form, offset included — +02:00 is Athens
+   in winter, +03:00 from the last Sunday in March. Get that wrong and the
+   countdown is an hour out for everyone.
+   When the premiere has passed the same card turns itself into "Out now",
+   so nothing has to be edited on the night. */
+const PREMIERE = {
+  lot:   '001',
+  title: '',                                 // ← the set's name, once it has one
+  at:    '2026-10-30T19:00:00+02:00',
+  url:   'https://youtu.be/X50-VdLBVPY'
+};
+
 const BATCH = null;
 
 /* const BATCH = {
@@ -519,11 +576,9 @@ const SELECTIONS = [
 const FORMULARY = [
   ['01', 'House / tech house',      '--solar',  '#FFB400'],
   ['02', 'Techno',                  '--glass',  '#CDD6DF'],
-  ['03', 'Deep / minimal',         '--ion-lt', '#5C72FF'],
+  ['03', 'Deep / minimal',          '--ion-lt', '#5C72FF'],
   ['04', 'Special / recorded live', '--signal', '#FF2D1C'],
-  ['05', 'Melodic / progressive',   '--orbit',  '#8B5CFF'],
-  ['06', 'Garage / breaks / disco', '--jade',   '#00D98C'],
-  ['07', 'Ambient / downtempo',     '--sand',   '#D8C3A0']
+  ['05', 'Drum & bass',             '--jade',   '#00D98C']
 ];
 
 /* ======================= nothing to edit below ========================== */
@@ -531,7 +586,8 @@ const FORMULARY = [
 document.getElementById('railHandle').textContent = HANDLE;
 document.getElementById('mailAddr').textContent = EMAIL;
 document.getElementById('footBatch').textContent =
-  (BATCH ? 'Batch ' + BATCH.lot : 'Batch 001 pending') + ' · Thessaloniki';
+  'Batch ' + ((BATCH && BATCH.lot) || (PREMIERE && PREMIERE.lot) || '001')
+  + ' · Thessaloniki';
 document.getElementById('routeCount').textContent = String(ROUTES.length).padStart(2, '0') + ' channels';
 
 /* ---------------------------------------------------------------- THE STREAM
@@ -655,8 +711,35 @@ document.getElementById('selections').innerHTML = SELECTIONS.map(s => `
     <span class="sel__go"><i></i>Spotify</span>
   </a>`).join('');
 
+/* The two invitations, each marked with the dose — blue for the eye that was
+   there, red for the hands on the records. */
+document.getElementById('call').innerHTML = [
+  ['#2741FF', '#1B2FBF', 'If you take photographs', 'send one. It might end up pressed onto the vinyl of the next episode, with your name on it.'],
+  ['#FF2D1C', '#C01F12', 'If you DJ', 'send a set. The next lot could be yours.']
+].map(([t, b, lead, rest]) => `
+  <li>${MARK([t, b], 'call__mark', 10, 28)}
+    <p><b>${lead}</b>, ${rest}</p>
+  </li>`).join('');
+
 const slot = document.getElementById('batchSlot');
 const tail = document.getElementById('batchTail');
+
+/* Days, hours, minutes, seconds — but only the units that still matter, so
+   the line stops growing once the wait is short. */
+function left(ms) {
+  const s = Math.max(0, Math.floor(ms / 1000));
+  const d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600);
+  const m = Math.floor(s % 3600 / 60), sec = s % 60;
+  const p = n => String(n).padStart(2, '0');
+  return d > 0 ? `${d}d ${p(h)}h ${p(m)}m` : `${p(h)}:${p(m)}:${p(sec)}`;
+}
+
+function whenText(iso) {
+  const t = new Date(iso);
+  const day = t.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+  const hm = t.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  return `${day} · ${hm} Athens`;
+}
 
 if (BATCH) {
   tail.textContent = 'Out now';
@@ -671,10 +754,28 @@ if (BATCH) {
         <p class="d d--dim">Listen &nbsp;→</p>
       </div>
     </a>`;
+} else if (PREMIERE) {
+  /* A dated thing, so the card counts rather than waits. Once the moment
+     passes the same card says "out now" without anyone touching it. */
+  const at = new Date(PREMIERE.at).getTime();
+  const render = () => {
+    const gone = Date.now() >= at;
+    tail.textContent = gone ? 'Out now' : 'Premiere';
+    slot.innerHTML = `
+      <a class="batch" href="${PREMIERE.url}" target="_blank" rel="noopener"
+         style="--c: var(--signal)">
+        <div class="batch__field">${field('lot' + PREMIERE.lot, hex('--signal'))}</div>
+        <div class="batch__body">
+          <p class="d">Lot <span class="lot">${PREMIERE.lot}</span> &nbsp;·&nbsp; ${gone ? 'Out now' : 'Premiere'}</p>
+          <p class="batch__name${gone ? '' : ' batch__count'}">${gone ? (PREMIERE.title || 'Lot 001') : left(at - Date.now())}</p>
+          <p class="batch__title">${gone ? whenText(PREMIERE.at) : (PREMIERE.title ? PREMIERE.title + ' · ' + whenText(PREMIERE.at) : whenText(PREMIERE.at))}</p>
+          <p class="d d--dim">${gone ? 'Watch' : 'Set a reminder'} &nbsp;→</p>
+        </div>
+      </a>`;
+  };
+  render();
+  setInterval(render, 1000);
 } else {
-  /* Nothing is published yet. An empty slot is more honest than a placeholder
-     release, and it reads as a catalogue waiting to start rather than a page
-     that is broken. */
   tail.textContent = 'In preparation';
   slot.innerHTML = `
     <div class="batch batch--empty" style="--c: var(--graphite)">
